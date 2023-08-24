@@ -3,6 +3,10 @@ const express = require('express')
 const router = express.Router()
 const tweetController = require('../controllers/tweet-controller')
 const userController = require('../controllers/user-controller')
+
+// middleware
+const { generalErrorHandler } = require('../middleware/error-handler')
+
 router.get('/tweets', tweetController.getTweets)
 
 router.use('/', (req, res) => res.redirect('/tweets'))
@@ -19,4 +23,5 @@ router.post('/signup', userController.signUp)
 router.get('/tweets', tweetController.getTweets)
 
 router.use('/', (req, res) => res.redirect('/tweets'))
+router.use('/', generalErrorHandler)
 module.exports = router
